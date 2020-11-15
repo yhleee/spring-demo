@@ -1,0 +1,44 @@
+
+buildscript{
+//    ext : 전역변수를 선언하겠다 
+//    springBootVerstion 이라는 전역변수를 생성하고, 그 값을 저장한다.
+    ext{ 
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+// 앞에 선언한 플러그인 의존성들을 적용할건지 결정
+// io.spring.dependency-management -> 스프링부트의 의존성을 관리해주는 플러그인 
+// 아래 4개의 플러그인은 자바와 스프링 부트를 사용하기 위해서는 필수로 apply 해준다. 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+group 'com.yunhee.lee'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+// 각종 의존성 (라이브러리) 들을 어떤 원격 저장소에서 받을지 정해준다. 
+// jcenter : 라이브러리 업로드를 간단하게 만든 리포지토리 
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+// 프로젝트 개발에 필요한 의존성을 선언한다. 
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    
+    compile ('org.springframework.boot:spring-boot-starter-web')
+    testCompile ('org.springframework.boot:spring-boot-starter-test')
+}
